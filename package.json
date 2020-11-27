@@ -14,9 +14,11 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "ramda": "^0.27.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
+    "superagent": "^6.1.0",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4"
   },
@@ -24,7 +26,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:nowatch": "react-scripts test --watchAll=false",
+    "eject": "react-scripts eject",
+    "lint": "yarn eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write '{src,test}/**/*.{js,ts,tsx,json,css,md}'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn test:nowatch",
+      "pre-push": "yarn build"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -43,5 +54,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/nock": "^11.1.0",
+    "@types/prettier": "^2.1.5",
+    "@types/ramda": "^0.27.32",
+    "eslint-plugin-deprecation": "^1.1.0",
+    "eslint-plugin-functional": "^3.1.0",
+    "husky": "^4.3.0",
+    "nock": "^13.0.5",
+    "prettier": "^2.2.0"
   }
 }
