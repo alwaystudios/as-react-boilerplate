@@ -7,10 +7,11 @@ import { unnest } from 'ramda'
 import { useDispatch } from 'react-redux'
 import { setFeatures } from './redux/features/featureActions'
 import { Features } from './components/Features'
+import { FeaturesType } from './types'
 
 const SEPARATOR = '|'
 
-const getQueryStringFeatures = (qsParams: any) =>
+const getQueryStringFeatures = (qsParams: any): FeaturesType =>
   unnest([qsParams.feature || []]).reduce(
     (result, feature) => ({
       ...result,

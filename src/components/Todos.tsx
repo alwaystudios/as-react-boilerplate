@@ -1,15 +1,19 @@
 import { FunctionComponent, useState } from 'react'
 import React, { useDispatch, useSelector } from 'react-redux'
+import { isFeatureEnabled } from '../redux/features/features'
+import { getFeatures } from '../redux/features/featureSelectors'
 import { addTodoAction, removeTodoAction, toggleTodoAction } from '../redux/todos/todoActions'
 import { getTodos } from '../redux/todos/todoSelectors'
 
 export const Todos: FunctionComponent = () => {
+  const features = useSelector(getFeatures)
   const todoList = useSelector(getTodos)
   const [newTodo, setNewTodo] = useState<string>('')
   const dispatch = useDispatch()
   return (
     <>
       <h1>Todo List</h1>
+      {isFeatureEnabled(features, 'todov2') && <p>todo v2 feature is enabled</p>}
 
       {todoList.map((todo) => (
         <div key={todo.id}>

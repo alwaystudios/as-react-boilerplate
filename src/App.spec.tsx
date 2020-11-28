@@ -7,7 +7,7 @@ import { configureStore } from './redux/store'
 import { Router } from 'react-router-dom'
 
 describe('App', () => {
-  it('renders', () => {
+  it('renders todo list', () => {
     const history = createMemoryHistory()
     const store = configureStore()
 
@@ -22,6 +22,26 @@ describe('App', () => {
     history.push('/todos')
 
     expect(getByText('Todo List')).toBeInTheDocument()
+  })
+
+  it('renders todo list v2', async () => {
+    const history = createMemoryHistory()
+    const store = configureStore()
+
+    const { getByText } = render(
+      <Provider store={store}>
+        <Router history={history}>
+          <App />
+        </Router>
+      </Provider>,
+    )
+
+    history.push('/todos?feature=todov2|true')
+
+    await waitFor(() => {
+      expect(getByText('Todo List')).toBeInTheDocument()
+      expect(getByText('todo v2 feature is enabled')).toBeInTheDocument()
+    })
   })
 
   it('sets feature state', async () => {
