@@ -11,3 +11,5 @@ export type TodoType = {
   content: string
   completed: boolean
 }
+
+export type FeaturesType = { [name: string]: string }
