@@ -1,6 +1,6 @@
 import './App.css'
 import React, { FunctionComponent, useEffect } from 'react'
-import { Route, Switch, useLocation } from 'react-router-dom'
+import { Link, Route, Switch, useLocation } from 'react-router-dom'
 import { parse } from 'query-string'
 import { Todos } from './components/Todos'
 import { unnest } from 'ramda'
@@ -26,11 +26,15 @@ const App: FunctionComponent = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(setFeatures(getQueryStringFeatures(qsParams)))
+    const features = getQueryStringFeatures(qsParams)
+    if (Object.keys(features).length > 0) {
+      dispatch(setFeatures(features))
+    }
   }, [qsParams])
 
   return (
     <div className="App">
+      <Link to={`/`}>Home</Link>
       <Switch>
         <Route path="/todos">
           <Todos />

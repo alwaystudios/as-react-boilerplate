@@ -5,7 +5,7 @@ import { testFeatures } from '../../../test/testFeatures'
 describe('features reducers', () => {
   it('sets features', () => {
     const _features = testFeatures()
-    const newState = features({}, setFeatures(_features))
-    expect(newState).toEqual(_features)
+    const newState = features(_features, setFeatures({ newFeature: 'true' }))
+    expect(newState).toEqual({ ..._features, newFeature: 'true' })
   })
 })
