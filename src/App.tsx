@@ -8,11 +8,15 @@ import { useDispatch } from 'react-redux'
 import { setFeatures } from './redux/features/featureActions'
 import { Features } from './components/Features'
 import { FeaturesType } from './types'
+import { Categories } from './components/Categories'
+import { getCookie, setCookie } from './hooks/useCookie'
 
 const SEPARATOR = '|'
 
-const getQueryStringFeatures = (qsParams: any): FeaturesType =>
-  unnest([qsParams.feature || []]).reduce(
+const getFeatures = (qsParams: any): FeaturesType => {
+  const cookieFeatures = getCookie('features')
+
+  const queryStringFeatures = unnest([qsParams.feature || []]).reduce(
     (result, feature) => ({
       ...result,
       [feature.split(SEPARATOR)[0]]: feature.split(SEPARATOR)[1],
@@ -20,27 +24,45 @@ const getQueryStringFeatures = (qsParams: any): FeaturesType =>
     {},
   )
 
+  return { ...cookieFeatures, ...queryStringFeatures }
+}
+
 const App: FunctionComponent = () => {
   const location = useLocation()
   const qsParams = parse(location.search)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const features = getQueryStringFeatures(qsParams)
+    const features = getFeatures(qsParams)
     if (Object.keys(features).length > 0) {
       dispatch(setFeatures(features))
+      setCookie('features', features)
     }
   }, [qsParams])
 
   return (
     <div className="App">
-      <Link to={`/`}>Home</Link>
+      <Link className="menu-link" to={`/`}>
+        Home
+      </Link>
+      <Link className="menu-link" to={`/todos`}>
+        Todos
+      </Link>
+      <Link className="menu-link" to={`/categories`}>
+        Categories
+      </Link>
+      <Link className="menu-link" to={`/features`}>
+        Features
+      </Link>
       <Switch>
         <Route path="/todos">
           <Todos />
         </Route>
         <Route path="/features">
           <Features />
+        </Route>
+        <Route path="/categories">
+          <Categories />
         </Route>
       </Switch>
     </div>

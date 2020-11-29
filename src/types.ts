@@ -13,3 +13,8 @@ export type TodoType = {
 }
 
 export type FeaturesType = { [name: string]: string }
+
+export type CategoryType = {
+  id: string
+  title: string
+}

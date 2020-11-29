@@ -6,8 +6,9 @@ export const Features: FunctionComponent = () => {
   const _features = useSelector(getFeatures)
 
   return (
-    <>
-      Features: <div className="features">{JSON.stringify(_features)}</div>
-    </>
+    <div>
+      <h1>Features</h1>
+      <div className="features">{JSON.stringify(_features)}</div>
+    </div>
   )
 }
