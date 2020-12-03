@@ -17,7 +17,7 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <Router history={history}>
-        <ErrorBoundary FallbackComponent={ErrorFallback as FunctionComponent}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
           <App />
         </ErrorBoundary>
       </Router>
