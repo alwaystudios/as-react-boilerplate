@@ -38,7 +38,8 @@
     "test:nowatch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "yarn eslint . --ext .js,.jsx,.ts,.tsx",
-    "format": "prettier --write '{src,test}/**/*.{js,ts,tsx,json,css,md}'"
+    "format": "prettier --write '{src,test}/**/*.{js,ts,tsx,json,css,md}'",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "husky": {
     "hooks": {
@@ -79,6 +80,7 @@
     "faker": "^5.1.0",
     "husky": "^4.3.0",
     "nock": "^13.0.5",
-    "prettier": "^2.2.0"
+    "prettier": "^2.2.0",
+    "source-map-explorer": "^2.5.1"
   }
 }
