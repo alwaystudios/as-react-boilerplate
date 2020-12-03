@@ -31,6 +31,9 @@ export const Todos: FunctionComponent = () => {
       <button
         disabled={!newTodo.length}
         onClick={() => {
+          if (newTodo === 'error') {
+            throw new Error('boom')
+          }
           dispatch(addTodoAction(newTodo))
           setNewTodo('')
         }}

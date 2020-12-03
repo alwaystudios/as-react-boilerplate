@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
@@ -7,6 +7,8 @@ import { Provider } from 'react-redux'
 import { createBrowserHistory } from 'history'
 import { configureStore } from './redux/store'
 import { Router } from 'react-router-dom'
+import { ErrorBoundary } from 'react-error-boundary'
+import { ErrorFallback } from './components/ErrorFallback'
 
 const history = createBrowserHistory()
 const store = configureStore()
@@ -15,7 +17,9 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <Router history={history}>
-        <App />
+        <ErrorBoundary FallbackComponent={ErrorFallback as FunctionComponent}>
+          <App />
+        </ErrorBoundary>
       </Router>
     </React.StrictMode>
   </Provider>,
