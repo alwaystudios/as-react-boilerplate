@@ -1,6 +1,6 @@
 import { testTodo } from '../../../test/testTodo'
 import { addTodoAction, removeTodoAction, toggleTodoAction } from './todoActions'
-import { todos } from './todoReducters'
+import { todos } from './todoReducers'
 
 describe('todo reducers', () => {
   it('adds a new todo', () => {
