@@ -11,6 +11,7 @@ import { FeaturesType } from './types'
 import { Categories } from './components/Categories'
 import { getCookie, setCookie } from './hooks/useCookie'
 import { Test } from './components/Codility/Test'
+import { Sockets } from './components/Sockets'
 
 const SEPARATOR = '|'
 
@@ -46,6 +47,9 @@ const App: FunctionComponent = () => {
       <Link className="menu-link" to={`/`}>
         Home
       </Link>
+      <Link className="menu-link" to={`/sockets`}>
+        Web sockets
+      </Link>
       <Link className="menu-link" to={`/test`}>
         Test
       </Link>
@@ -59,6 +63,9 @@ const App: FunctionComponent = () => {
         Features
       </Link>
       <Switch>
+        <Route path="/sockets">
+          <Sockets />
+        </Route>
         <Route path="/test">
           <Test />
         </Route>
