@@ -1,14 +1,35 @@
 import React from 'react'
-import { render, waitFor } from '@testing-library/react'
+import { render, waitFor, screen } from '@testing-library/react'
 import App from './App'
 import { createMemoryHistory } from 'history'
 import { Provider } from 'react-redux'
 import { configureStore } from './redux/store'
 import { Router } from 'react-router-dom'
 import { deleteCookie } from './hooks/useCookie'
+import * as beersModule from './components/Beers'
 
 describe('App', () => {
   beforeEach(() => deleteCookie('features'))
+
+  it('renders beers component', () => {
+    const MockBeers = jest.spyOn(beersModule, 'Beers').mockImplementation(() => <>mock beers</>)
+
+    const history = createMemoryHistory()
+    const store = configureStore()
+
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <App />
+        </Router>
+      </Provider>,
+    )
+
+    history.push('/beers')
+
+    expect(screen.getByText('mock beers')).toBeInTheDocument()
+    expect(MockBeers).toHaveBeenCalledTimes(1)
+  })
 
   it('renders todo list', () => {
     const history = createMemoryHistory()

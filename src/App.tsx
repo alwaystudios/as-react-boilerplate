@@ -12,6 +12,7 @@ import { Categories } from './components/Categories'
 import { getCookie, setCookie } from './hooks/useCookie'
 import { Test } from './components/Codility/Test'
 import { Sockets } from './components/Sockets'
+import { Beers } from './components/Beers'
 
 const SEPARATOR = '|'
 
@@ -47,6 +48,9 @@ const App: FunctionComponent = () => {
       <Link className="menu-link" to={`/`}>
         Home
       </Link>
+      <Link className="menu-link" to={`/beers`}>
+        Beers
+      </Link>
       <Link className="menu-link" to={`/sockets`}>
         Web sockets
       </Link>
@@ -65,6 +69,9 @@ const App: FunctionComponent = () => {
       <Switch>
         <Route path="/sockets">
           <Sockets />
+        </Route>
+        <Route path="/beers">
+          <Beers />
         </Route>
         <Route path="/test">
           <Test />
